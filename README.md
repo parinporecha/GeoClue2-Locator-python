@@ -6,5 +6,5 @@ It will print your location and exit after 10 seconds.
 
 ** Known issues - **
 
-- Code runs but the location doesn't get printed
-For this, run geoclue executable as root in another terminal. Location of the executable is in `org.freedesktop.GeoClue2.service` file
+** Code runs but the location doesn't get printed **
+- For this, run geoclue executable as root in another terminal. Location of the executable is in `org.freedesktop.GeoClue2.service` file

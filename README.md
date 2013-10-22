@@ -1,4 +1,4 @@
-You need to install [GeoClue2](http://www.freedesktop.org/wiki/Software/GeoClue/) on your machine before running the code
+You need to install [GeoClue2](http://www.freedesktop.org/wiki/Software/GeoClue/) on your machine before running the code.
 On Arch it is available in AUR (geoclue2-git)
 
 Then you can run `where-am-i.py`

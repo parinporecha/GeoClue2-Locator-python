@@ -129,7 +129,7 @@ def main():
     gobject.timeout_add(10000, loop.quit)
     loop.run()
     client.Stop()
-    print "If no location was printed, run geoclue in another terminal -"
-    print "<<prefix path given while installing>>/libexec/geoclue"
+    print "If no location was printed, run geoclue as root in another terminal -"
+    print "Path to the executable is in 'org.freedesktop.GeoClue2.service' file"
 
 main()

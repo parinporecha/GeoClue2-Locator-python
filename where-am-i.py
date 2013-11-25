@@ -2,9 +2,12 @@
 
 import sys
 import dbus
-import gobject
 import traceback
 
+from gi.repository import Gtk
+from gi.repository import GtkClutter
+from gi.repository import GObject
+from gi.repository import Champlain
 from dbus.mainloop.glib import DBusGMainLoop
 
 
@@ -85,6 +88,35 @@ def location_updated(old_path, new_path):
     print "Accuracy = " + str(accuracy)
     print "Description = " + str(description)
 
+    show_position_on_map(latitude, longitude)
+
+def show_position_on_map(latitude, longitude):
+    GtkClutter.init([])
+    window = Gtk.Window()
+    window.connect("delete-event", Gtk.main_quit)
+    window.set_default_size(500, 350)
+
+    map_to_show = get_map(latitude, longitude)
+
+    window.add(map_to_show)
+    window.show_all()
+    Gtk.main()
+
+def get_map(latitude, longitude):
+    view = Champlain.View()
+    view.set_kinetic_mode(True)
+    view.set_property("zoom-level", 12)
+    view.set_reactive(True)
+    view.set_size(500, 350)
+    view.center_on(latitude, longitude)
+
+    embed = GtkClutter.Embed.new()
+    embed.realize()
+    stage = embed.get_stage()
+    stage.add_actor(view)
+
+    return embed
+
 def main():
     print "This code will print your location and exit after 10 seconds"
 
@@ -123,10 +155,10 @@ def main():
     # Start receiving events about current location
     client.Start()
 
-    loop = gobject.MainLoop()
+    loop = GObject.MainLoop()
 
     # Quit after 10 seconds
-    gobject.timeout_add(10000, loop.quit)
+    GObject.timeout_add(10000, loop.quit)
     loop.run()
     client.Stop()
     print "If no location was printed, run geoclue as root in another terminal -"
